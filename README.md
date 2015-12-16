@@ -9,7 +9,6 @@ bower install
 ```
 Start the project (e.g. using the Command Prompt, navigate to the parent directory )
 * Start App in DEV mode
-* 
 ```
 npm start or gulp server-start
 ```
