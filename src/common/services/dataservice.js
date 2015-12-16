@@ -10,10 +10,11 @@
         service.getSearchData = function(hashtag) {
             var hashtagValue = hashtag ? hashtag : 'levi9',
                 accessToken = '335399504.1fb234f.833245afafb04e0b82ac075243410227',
+                searchItemsCount = 28,
                 config = {
-                    'access_token': accessToken,
+                    access_token: accessToken,
                     callback: 'JSON_CALLBACK',
-                    count: 28
+                    count: searchItemsCount
                 },
                 instagramUrl = 'https://api.instagram.com/v1/tags/' + hashtagValue + '/media/recent?';
 

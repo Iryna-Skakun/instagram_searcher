@@ -1,6 +1,9 @@
 {
-    "excludeFiles": ["node_modules/**", "bower_components/**"],
-
+    "excludeFiles": [
+        "node_modules/**",
+        "bower_components/**",
+        "./src/common/services/dataservice.js"
+    ],
     "requireCurlyBraces": [
         "if",
         "else",
@@ -11,39 +14,68 @@
         "catch"
     ],
     "requireOperatorBeforeLineBreak": true,
-    "requireCamelCaseOrUpperCaseIdentifiers": false,
+    "requireCamelCaseOrUpperCaseIdentifiers": {
+        "ignoreProperties": false,
+        "strict": false
+    },
     "maximumLineLength": {
-      "value": 120,
-      "allowComments": true,
-      "allowRegex": true
+        "value": 120,
+        "allowComments": true,
+        "allowRegex": true
     },
     "validateIndentation": 4,
     "validateQuoteMarks": "'",
-
     "disallowMultipleLineStrings": true,
     "disallowMixedSpacesAndTabs": true,
     "disallowTrailingWhitespace": true,
     "disallowSpaceAfterPrefixUnaryOperators": true,
     "disallowMultipleVarDecl": null,
-
     "requireSpaceAfterKeywords": [
-      "if",
-      "else",
-      "for",
-      "while",
-      "do",
-      "switch",
-      "return",
-      "try",
-      "catch"
+        "if",
+        "else",
+        "for",
+        "while",
+        "do",
+        "switch",
+        "return",
+        "try",
+        "catch"
     ],
     "requireSpaceBeforeBinaryOperators": [
-        "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
-        "&=", "|=", "^=", "+=",
-
-        "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&",
-        "|", "^", "&&", "||", "===", "==", ">=",
-        "<=", "<", ">", "!=", "!=="
+        "=",
+        "+=",
+        "-=",
+        "*=",
+        "/=",
+        "%=",
+        "<<=",
+        ">>=",
+        ">>>=",
+        "&=",
+        "|=",
+        "^=",
+        "+=",
+        "+",
+        "-",
+        "*",
+        "/",
+        "%",
+        "<<",
+        ">>",
+        ">>>",
+        "&",
+        "|",
+        "^",
+        "&&",
+        "||",
+        "===",
+        "==",
+        ">=",
+        "<=",
+        "<",
+        ">",
+        "!=",
+        "!=="
     ],
     "requireSpaceAfterBinaryOperators": true,
     "requireSpacesInConditionalExpression": true,
@@ -52,14 +84,11 @@
     "disallowSpacesInsideObjectBrackets": "all",
     "disallowSpacesInsideArrayBrackets": "all",
     "disallowSpacesInsideParentheses": true,
-
     "validateJSDoc": {
         "checkParamNames": true,
         "requireParamTypes": true
     },
-
     "disallowMultipleLineBreaks": true,
-
     "disallowCommaBeforeLineBreak": null,
     "disallowDanglingUnderscores": null,
     "disallowEmptyBlocks": null,
