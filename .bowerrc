@@ -1,6 +1,6 @@
 {
     "directory": "bower_components",
     "scripts": {
-        "posinstall": "gulp wiredep"
+        "posinstall": "gulp inject"
     }
 }
