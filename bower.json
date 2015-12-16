@@ -1,0 +1,25 @@
+{
+  "name": "instagram_searcher",
+  "version": "0.1.0",
+  "description": "",
+  "authors": [
+    "Iryna Skakun"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": ["dist/css/bootstrap.css", "dist/js/bootstrap.js"]
+    }
+  }
+}
