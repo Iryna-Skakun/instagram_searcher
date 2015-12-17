@@ -1,3 +1,4 @@
-/**
- * Created by i.skakun on 12/17/2015.
- */
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')({lazy: true});
+
+gulp.task('help', $.taskListing);

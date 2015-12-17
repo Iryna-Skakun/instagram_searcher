@@ -1,4 +1,4 @@
-(function() {
+(function () {
     /*jshint validthis: true */
     'use strict';
 
@@ -8,17 +8,12 @@
     /* @ngInject */
     function instagramSearchDataCtrl(dataservice) {
         var vm = this;
-        initInstagramSearchData();
-
-        vm.getHashTag = function(hashtag) {
-            initInstagramSearchData(hashtag);
-        };
-
-        function initInstagramSearchData(hashtag) {
+        vm.getHashTag = function (hashtag) {
             dataservice.getSearchData(hashtag).then(
-                function(data) {
+                function (data) {
                     vm.instagramDatas = data.data;
                 });
-        }
+        };
+        vm.getHashTag();
     }
 }());

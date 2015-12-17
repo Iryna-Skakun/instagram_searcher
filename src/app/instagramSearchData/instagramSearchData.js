@@ -9,7 +9,8 @@
         return {
             restrict: 'E',
             templateUrl: 'app/instagramSearchData/instagram-search-data.html',
-            controller: 'instagramSearchDataCtrl'
+            controller: 'instagramSearchDataCtrl',
+            controllerAs: 'vm'
         };
     }
 }());

@@ -6,9 +6,9 @@ gulp.task('analyzing', function() {
     config.log('Analyzing source with JSHint and JSCS');
     return gulp
         .src(config.alljs)
-        .pipe($.debug())
         .pipe($.jscs())
         .pipe($.jshint())
+        .pipe($.debug())
         .pipe($.jshint.reporter('default', {verbose: true}))
         .pipe($.jshint.reporter('fail'));
 });
