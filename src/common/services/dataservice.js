@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -6,9 +6,14 @@
         .factory('dataservice', dataservice);
     /* @ngInject */
     function dataservice($http) {
-        var service = {};
-        service.getSearchData = function(hashtag) {
-            var hashtagValue = hashtag ? hashtag : 'levi9',
+        var service = {
+            getSearchData: getSearchData
+        };
+
+        return service;
+
+        function getSearchData(hashtag) {
+            var hashtagValue = hashtag || 'levi9',
                 accessToken = '335399504.1fb234f.833245afafb04e0b82ac075243410227',
                 searchItemsCount = 28,
                 config = {
@@ -20,11 +25,10 @@
 
             return $http.jsonp(instagramUrl, {params: config})
                 .then(onGetSearchDataComplete);
-        };
+        }
+
         function onGetSearchDataComplete(response) {
             return response.data;
         }
-        return service;
     }
 }());
-

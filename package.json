@@ -26,6 +26,7 @@
     "gulp-useref": "^3.0.3",
     "gulp-util": "^3.0.7",
     "jshint": "^2.8.0",
+    "path": "^0.12.7",
     "require-dir": "^0.3.0",
     "wiredep": "^3.0.0"
   },

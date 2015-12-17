@@ -1,20 +1,21 @@
 module.exports = function() {
-    var src = './src/';
-    var srcApp = src + 'app/';
-    var server = './';
     var util = require('gulp-util');
     var nodemon = require('gulp-nodemon');
+    var path = require('path');
+    var src = './src/';
+    var srcApp = path.join(src, 'app/');
+    var server = './';
     var config = {
         //all js for analyzing
         alljs: [
             './src/**/*.js',
             './*.js'
         ],
-        index: src + 'index.html',
+        index: path.join(src, 'index.html'),
         sources: [
-            src + '**/*.module.js',
-            src + '**/*.js',
-            src + '**/*.css'
+            path.join(src, '**/*.module.js'),
+            path.join(src, '**/*.js'),
+            path.join(src, '**/*.css')
         ],
         src: src,
         temp: './tmp/',
@@ -30,7 +31,7 @@ module.exports = function() {
             lib: 'lib.js'
         },
         //template cache
-        htmltemplates: srcApp + '**/*.html',
+        htmltemplates: path.join(srcApp, '**/*.html'),
         templateCache: {
             file: 'templates.js',
             options: {
