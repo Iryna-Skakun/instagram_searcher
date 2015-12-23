@@ -1,10 +1,15 @@
-module.exports = function() {
+module.exports = function () {
+    var gulp = require('gulp');
     var util = require('gulp-util');
     var nodemon = require('gulp-nodemon');
     var path = require('path');
+    var del = require('del');
+    var browserSync = require('browser-sync');
     var src = './src/';
     var srcApp = path.join(src, 'app/');
     var server = './';
+    var temp = './tmp/';
+    var build = './build/';
     var config = {
         //all js for analyzing
         alljs: [
@@ -12,23 +17,37 @@ module.exports = function() {
             './*.js'
         ],
         index: path.join(src, 'index.html'),
-        sources: [
+        css: path.join(build, 'styles/'),
+        sass: path.join(src, '/styles/*.sass'),
+        appComponents: [
             path.join(src, '**/*.module.js'),
             path.join(src, '**/*.js'),
-            path.join(src, '**/*.css')
+            path.join(build, 'styles/app.css'),
+        ],
+        bowerJScomponents: [
+            './bower_components/angular/angular.js',
+            './bower_components/jquery/dist/jquery.js',
+            './bower_components/bootstrap/dist/js/bootstrap.js'
+        ],
+        bowerCSScomponents: [
+            './bower_components/bootstrap/dist/css/bootstrap.css'
         ],
         src: src,
-        temp: './tmp/',
+        temp: temp,
         //Node settings
         defaultPort: 8080,
         nodeServer: './server.js',
         server: server,
         //build folder
-        build: './build/',
+        build: build,
         //optimized files
-        optimized: {
+        optimizedJs: {
             app: 'app.js',
             lib: 'lib.js'
+        },
+        optimizedCss: {
+            app: 'app.css',
+            lib: 'lib.css'
         },
         //template cache
         htmltemplates: path.join(srcApp, '**/*.html'),
@@ -39,18 +58,7 @@ module.exports = function() {
                 standAlone: false,
                 root: 'app/'
             }
-        },
-        //Bower and NPM locations
-        bower: {
-            json: require('./bower.json'),
-            directory: './bower_components/'
         }
-    };
-    config.getWiredepDefaultOptions = function() {
-        var options = {
-            bowerJson: config.bower.json,
-            directory: config.bower.directory
-        };
     };
     //Log function
     config.log = function (msg) {
@@ -64,32 +72,64 @@ module.exports = function() {
             util.log(util.colors.blue(msg));
         }
     };
+    //clean function
+    config.clean = function (path) {
+        config.log('Cleaning: ' + util.colors.blue(path));
+        del(path);
+    };
     //Server function
-    config.serve =  function (isDev) {
+    config.serve = function () {
         var nodeOptions = {
             script: config.nodeServer,
             delayTime: 1,
-            env: {
-                'PORT': config.defaultPort,
-                'NODE_ENV': isDev ? 'dev' : 'build'
-            },
             watch: [config.server]
         };
         return nodemon(nodeOptions)
-            .on('restart', ['analyzing'], function(ev) {
+            .on('restart', function (ev) {
                 config.log('*** nodemon restarted');
                 config.log('files changed on restart:\n' + ev);
+                setTimeout(function () {
+                    browserSync.reload({stream: false});
+                }, 1000);
             })
-            .on('start', function() {
+            .on('start', function () {
                 config.log('*** nodemon started');
+                startBrowserSync();
             })
-            .on('crash', function() {
+            .on('crash', function () {
                 config.log('*** nodemon crashed: script crashed for some reason');
             })
-            .on('exit', function() {
+            .on('exit', function () {
                 config.log('*** nodemon exited cleanly');
             });
     };
+
+    function startBrowserSync() {
+        if (browserSync.active) {
+            return;
+        }
+        config.log('Starting browser-sync on port' + config.defaultPort);
+        gulp.watch([config.alljs, config.htmltemplates], ['optimize', browserSync.reload]);
+        gulp.watch(config.sass, ['styles', browserSync.reload]);
+        var options = {
+            proxy: 'localhost:' + config.defaultPort,
+            port: config.defaultPort,
+            files:  [config.client + '**/*.*', '!' + config.less, config.temp + '**/*.css'],
+            ghostMode: {
+                clicks: true,
+                location: false,
+                forms: true,
+                scroll: true
+            },
+            injectChanges: true,
+            logFileChanges: true,
+            logLevel: 'debug',
+            logPrefix: 'gulp-patterns',
+            notify: true,
+            reloadDelay: 500
+        };
+        browserSync(options);
+    }
 
     return config;
 };

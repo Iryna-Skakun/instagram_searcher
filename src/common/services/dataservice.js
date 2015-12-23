@@ -1,11 +1,11 @@
-(function () {
+(function() {
     'use strict';
 
     angular
         .module('dataservice.module')
         .factory('dataservice', dataservice);
     /* @ngInject */
-    function dataservice($http) {
+    function dataservice($http, instagramConfig) {
         var service = {
             getSearchData: getSearchData
         };
@@ -14,16 +14,9 @@
 
         function getSearchData(hashtag) {
             var hashtagValue = hashtag || 'levi9',
-                accessToken = '335399504.1fb234f.833245afafb04e0b82ac075243410227',
-                searchItemsCount = 28,
-                config = {
-                    access_token: accessToken,
-                    callback: 'JSON_CALLBACK',
-                    count: searchItemsCount
-                },
                 instagramUrl = 'https://api.instagram.com/v1/tags/' + hashtagValue + '/media/recent?';
 
-            return $http.jsonp(instagramUrl, {params: config})
+            return $http.jsonp(instagramUrl, {params: instagramConfig})
                 .then(onGetSearchDataComplete);
         }
 

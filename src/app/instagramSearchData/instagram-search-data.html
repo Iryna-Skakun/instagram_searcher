@@ -6,15 +6,15 @@
     </div>
     <button ng-click="vm.getHashTag(hashtag)" type="button" class="btn btn-primary">Search</button>
 </form>
-<div class="row-fluid">
-    <ul class="equal-height-thumbnail">
-        <li ng-repeat="instagramData in vm.instagramDatas" ng-click="showDetails = !showDetails" class="insta-block">
-            <img ng-src="{{instagramData.images.standard_resolution.url}}"/>
-          <span class="label label-default">Hashtags:</span> <ul class="list-inline"><li ng-repeat="tag in instagramData.tags" class="small">#{{tag}}</li></ul>
+<div class="instagram-conteiner">
+    <ul class="instagram-thumbnail">
+        <li ng-repeat="instagramData in vm.instagramDatas track by instagramData.id" ng-click="showDetails = !showDetails" class="instagram-block">
+            <img ng-src="{{::instagramData.images.standard_resolution.url}}" class="instagram-pic"/>
+            <span class="label label-default">Hashtags:</span> <ul class="list-inline"><li ng-repeat="tag in instagramData.tags track by $index" class="small">#{{::tag}}</li></ul>
             <div class="caption" ng-if="showDetails">
-                <p class="small"><strong>User name:</strong>{{instagramData.user.full_name}}</p>
-                <p class="small">Likes <span class="badge">{{instagramData.likes.count}}</span>
-                    <a ng-href ="{{instagramData.link}} "target="_blank" class="btn btn-primary btn-sm" role="button">Visit user page</a>
+                <p class="small"><strong>User name:</strong>{{::instagramData.user.full_name}}</p>
+                <p class="small">Likes <span class="badge">{{::instagramData.likes.count}}</span>
+                    <a ng-href="{{::instagramData.link}}" target="_blank" class="btn btn-primary btn-sm" role="button">Visit user page</a>
                 </p>
             </div>
         </li>

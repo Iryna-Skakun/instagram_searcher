@@ -1,26 +1,18 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({lazy: true});
 var config = require('../gulp.config')();
+var lazypipe = require('lazypipe');
 
-gulp.task('optimize', ['inject'], function() {
+gulp.task('optimize', ['inject'], function () {
     config.log('Optimizing the javascript, css, html');
-    var templateCache = config.temp + config.templateCache.file,
-        assets = $.useref({
-            searchPath: './',
-            transformPath: function(filePath) {
-                return filePath.replace('../', '');
-            }
-        });
     return gulp
         .src(config.index)
         .pipe($.plumber())
-        .pipe($.inject(gulp.src(templateCache, {read: false}), {
-            starttag: '<!-- inject:templates:js -->'
-        }))
-        .pipe(assets)
-        .pipe($.if('*.css', $.csso()))
-        .pipe($.if('**!/' + config.optimized.lib, $.uglify()))
-        .pipe($.if('**!/' + config.optimized.app, $.ngAnnotate({add: true})))
-        .pipe($.if('**!/' + config.optimized.app, $.uglify()))
+        .pipe($.useref({searchPath: './'}, lazypipe().pipe($.sourcemaps.init, {loadMaps: true})))
+        .pipe($.if('**/' + config.optimizedCss.lib, $.csso()))
+        .pipe($.if('**/' + config.optimizedJs.lib, $.uglify()))
+        .pipe($.if('**/' + config.optimizedJs.app, $.ngAnnotate({add: true})))
+        .pipe($.if('**/' + config.optimizedJs.app, $.uglify()))
+        .pipe($.sourcemaps.write('./source'))
         .pipe(gulp.dest(config.build));
 });

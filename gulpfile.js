@@ -3,4 +3,4 @@ var $ = require('gulp-load-plugins')({lazy: true});
 var requireDir = require('require-dir');
 requireDir('./gulp-tasks', {recurse: true});
 
-gulp.task('default', ['server-dev']);
+gulp.task('default', ['server-build']);
