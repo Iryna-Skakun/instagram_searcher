@@ -8,18 +8,12 @@ $ npm install
 $ bower install
 ```
 Start the project (e.g. using the Command Prompt, navigate to the parent directory )
-* Start App in DEV mode
+
 ```
-$ npm start or $ gulp server-dev
+$ npm start or $ gulp 
 ```
-* Start App in BUILD mode
-```
-$ gulp server-build
-```
-Go to your browser and run
-```
-$ http://localhost:8080/
-```
+
+BrowserSync will launch app in your default browser.
 
 
 
