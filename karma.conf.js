@@ -18,7 +18,11 @@ module.exports = function(config) {
       'build/js/lib.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'build/js/app.js',
-      'test/unit/controllers/instagramSearchDataCtrl.spec.js'
+      'test/unit/controllers/instagramSearchDataCtrl.spec.js',
+      'test/unit/services/dataservice.spec.js',
+      'test/unit/directives/instagramSearchData.spec.js',
+      //location of templates
+      'src/app/instagramSearchData/instagram-search-data.html'
     ],
 
 
@@ -29,6 +33,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      //location of templates
+      'src/**/*.html': ['ng-html2js']
+    },
+    ngHtml2JsPreprocessor: {
+      // strip app from the file path
+      stripPrefix: 'src/app/',
+      moduleName: 'intagramTemplate'
     },
 
 
