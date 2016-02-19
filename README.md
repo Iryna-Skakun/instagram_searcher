@@ -12,8 +12,8 @@ Start the project (e.g. using the Command Prompt, navigate to the parent directo
 ```
 $ npm start or $ gulp 
 ```
-
-BrowserSync will launch app in your default browser.
+ 
+ Launch app in your browser - http://localhost:8080.
 
 ### Unit testing
 For unit testing used Karma and karma-jasminea plugin - adapter for Jasmine testing framework.
